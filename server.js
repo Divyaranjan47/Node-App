@@ -4,6 +4,9 @@ const fs = require('fs');
 
 const port = process.env.PORT || 3000;
 hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerHelper('getYear', () => {
+    return new Date().getFullYear();
+});
 const app = express();
 app.set('view engine', 'hbs');
 
@@ -29,14 +32,19 @@ app.get('/', (req, res) => {
 //        hobby: 'biking'
 //    });
     res.render('home.hbs', {
-        pageTitle: 'Home Page',
-        year: new Date().getFullYear()
+        pageTitle: 'Home Page'
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
         pageTitle: 'About Page'
+    });
+});
+
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs', {
+        pageTitle: 'Projects'
     });
 });
 
